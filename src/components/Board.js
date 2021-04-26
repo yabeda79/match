@@ -2,26 +2,12 @@ import React from "react";
 
 import Card from "./Card";
 
-const Board = ({images}) => {
+const Board = ({ images }) => {
   return (
     <div className="board4">
-      <Card images={images} />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-
+      {images.map((image, ind) => (
+        <Card key={ind} image={image} />
+      ))}
     </div>
   );
 };

@@ -14,8 +14,11 @@ const App = () => {
         .fill(null)
         .map(() => fetch(`https://source.unsplash.com/300x300`))
     );
-    setImages(response);
-    console.log(response);
+    let data = await Promise.all(response.map((item) => item.blob())); //axios юзнуть https://github.com/unsplash/unsplash-js#usage
+    const urlCreator = window.URL || window.webkitURL;
+    data = data.map((item) => urlCreator.createObjectURL(item));
+    setImages(data);
+    console.log(data);
   };
 
   useEffect(() => {
@@ -25,7 +28,7 @@ const App = () => {
   return (
     <div className="app">
       <Board images={images} />
-      <Select setOption={setOption} />
+      <Select option={option} setOption={setOption} />
     </div>
   );
 };
