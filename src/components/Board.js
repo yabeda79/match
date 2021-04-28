@@ -2,11 +2,11 @@ import React from "react";
 
 import Card from "./Card";
 
-const Board = ({ images }) => {
+const Board = ({ images, setImages }) => {
   return (
     <div className="board4">
       {images.map((image, ind) => (
-        <Card key={ind} image={image} />
+        <Card key={ind} images={image} setImages={setImages} />
       ))}
     </div>
   );

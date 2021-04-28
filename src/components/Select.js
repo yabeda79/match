@@ -9,9 +9,9 @@ const Select = ({ option, setOption }) => {
     <form>
       <div>
         <select value={option} onChange={optionHandler}>
-          <option value="16">4 on 4</option>
-          <option value="9">3 on 3</option>
-          <option value="4">2 on 2</option>
+          <option value="8">4 on 4</option>
+          <option value="3">3 on 3</option>
+          <option value="2">2 on 2</option>
         </select>
       </div>
     </form>
