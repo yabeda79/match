@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
 import "./App.css";
 //import { createApi } from "unsplash-js";
 
@@ -30,13 +32,14 @@ const App = () => {
         src: urlCreator.createObjectURL(item),
         rotated: false,
         completed: false,
-        id: Math.floor(Math.random() * 1000),
+        pairId: uuidv4(),
       };
     });
-    data = data.concat(data).sort(() => Math.random() - 0.5);
+    data = data.concat(data).map(item => ({ ...item, id: uuidv4() })).sort(() => Math.random() - 0.5);
     setImages(data);
-    console.log(data);
   };
+
+  //TODO: implement shuffle function
 
   useEffect(() => {
     getImage();

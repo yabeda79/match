@@ -1,14 +1,16 @@
 import React from "react";
 // import astro from "../img/astro.png";
 
-const Card = ({ images, setImages }) => {
+import { StyledCard, StyledCardImage } from "./styled";
+
+const Card = ({ image, onClick }) => {
   // const checkCard = () => {
   //   if (images.completed === false) {
   //     images.completed = true;
   //     console.log(images.completed);
   //   } else {
-  //     for (let i = 0; i < images.lengh; i++) {
-  //       for (let j = 0; j < images.lengh; j++) {
+  //     for (let i = 0; i < images.length; i++) {
+  //       for (let j = 0; j < images.length; j++) {
   //         if (images[i].id === images[j].id && images[i].completed === true) {
   //           images[j].completed = true;
   //         }
@@ -16,15 +18,11 @@ const Card = ({ images, setImages }) => {
   //     }
   //   }
   // };
-  const rotateCard = () => {
-    // images.rotated = !images.rotated;
-    setImages((images.rotated = true));
-    console.log(images.rotated);
-  };
+
   // ------------------------ласт версия------------------------
   // const checkCard = () => {
-  //   for (let i = 0; i < images.lengh; i++) {
-  //     for (let j = 0; j < images.lengh; j++) {
+  //   for (let i = 0; i < images.length; i++) {
+  //     for (let j = 0; j < images.length; j++) {
   //       if (
   //         images[i].id === images[j].id &&
   //         images[i].rotated === true &&
@@ -36,15 +34,10 @@ const Card = ({ images, setImages }) => {
   //   }
   // };
 
-  const main = () => {
-    rotateCard();
-    // checkCard();
-  };
-
   return (
-    <div onClick={main} className="card">
-      <img src={images.src} alt="card" />
-    </div>
+    <StyledCard rotated={image.rotated} onClick={() => onClick(image.id)}>
+      <StyledCardImage src={image.src} alt="card" />
+    </StyledCard>
   );
 };
 

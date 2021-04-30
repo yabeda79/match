@@ -63,20 +63,3 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-.card {
-  width: 150px;
-  height: 150px;
-  margin: 5px;
-
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card img {
-  width: auto;
-  height: 150px;
-  overflow: hidden;
-}
