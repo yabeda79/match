@@ -4,7 +4,9 @@ import Card from "./Card";
 
 const Board = ({ images, setImages }) => {
   useEffect(() => {
-    checkCardRotation();
+    if (images.filter(i => i.rotated).length === 2) {
+      checkCardRotation();
+    }
   }, [images]);
 
   const handleCardClick = (id) => {
@@ -28,16 +30,15 @@ const Board = ({ images, setImages }) => {
 
   const checkCardRotation = () => {
     const filteredImg = images.filter(i => i.rotated);
+    const completed = filteredImg[0].pairId === filteredImg[1].pairId;
 
-    if (filteredImg.length === 2 && filteredImg[0].pairId === filteredImg[1].pairId) {
-      setImages(
-        images.map((img) =>
-          img.rotated
-            ? { ...img, completed: true, rotated: false }
-            : { ...img, rotated: false }
-        )
-      );
-    }
+    setImages(
+      images.map((img) =>
+        img.rotated
+          ? { ...img, completed, rotated: completed }
+          : img
+      )
+    );
   };
 
   // const checkCardRotation = (id) => {

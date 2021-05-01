@@ -42,7 +42,7 @@ const App = () => {
         src: urlCreator.createObjectURL(item),
         rotated: false,
         completed: false,
-        pairId: uuidv4(),
+        pairId: 'uuidv4()',
       };
     });
     data = shuffle(
