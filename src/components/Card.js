@@ -1,7 +1,7 @@
 import React from "react";
 // import astro from "../img/astro.png";
 
-import { StyledCard, StyledCardImage, StyledCardBg } from "./styled";
+import { StyledCard, StyledCardImage, StyledCardInner, StyledCardBg } from "./styled";
 
 const Card = ({ image, onClick }) => {
   // const checkCard = () => {
@@ -35,9 +35,11 @@ const Card = ({ image, onClick }) => {
   // };
 
   return (
-    <StyledCard rotated={image.rotated} onClick={() => onClick(image.id)}>
-      {/* <StyledCardBg rotated={image.rotated} /> */}
-      <StyledCardImage rotated={image.rotated} src={image.src} alt="card" />
+    <StyledCard rotated={image.rotated || image.completed} onClick={() => onClick(image.id)}>
+      <StyledCardInner>
+        <StyledCardBg />
+        <StyledCardImage rotated={image.rotated} src={image.src} alt="card" />
+      </StyledCardInner>
     </StyledCard>
   );
 };

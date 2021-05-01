@@ -10,7 +10,6 @@ import Select from "./components/Select";
 const App = () => {
   const [option, setOption] = useState(8);
   const [images, setImages] = useState([]);
-  const [filteredImg, setFilteredImg] = useState([]);
   // const [completedImg, setCompletedImg] = useState([]);
 
   // ------------------------increment shuffle?------------------------
@@ -56,7 +55,6 @@ const App = () => {
 
   useEffect(() => {
     getImage();
-    setFilteredImg([]);
   }, [option]);
 
   return (
@@ -64,8 +62,6 @@ const App = () => {
       <Board
         images={images}
         setImages={setImages}
-        filteredImg={filteredImg}
-        setFilteredImg={setFilteredImg}
       />
       <Select option={option} setOption={setOption} />
     </div>

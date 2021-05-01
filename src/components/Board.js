@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import Card from "./Card";
 
-const Board = ({ images, setImages, filteredImg, setFilteredImg }) => {
+const Board = ({ images, setImages }) => {
   useEffect(() => {
     checkCardRotation();
   }, [images]);
@@ -26,13 +26,14 @@ const Board = ({ images, setImages, filteredImg, setFilteredImg }) => {
     );
   };
 
-  const checkCardRotation = (pairId) => {
-    setFilteredImg(images.filter((item) => item.rotated === true));
-    if (filteredImg.length == 2) {
+  const checkCardRotation = () => {
+    const filteredImg = images.filter(i => i.rotated);
+
+    if (filteredImg.length === 2 && filteredImg[0].pairId === filteredImg[1].pairId) {
       setImages(
         images.map((img) =>
-          img.pairId === pairId //img.id === id
-            ? { ...img, completed: true }
+          img.rotated
+            ? { ...img, completed: true, rotated: false }
             : { ...img, rotated: false }
         )
       );
@@ -53,9 +54,6 @@ const Board = ({ images, setImages, filteredImg, setFilteredImg }) => {
   //     setFilteredImg([]);
   //   }
   // };
-
-  console.log(filteredImg);
-  console.log(images);
 
   {
     /*
