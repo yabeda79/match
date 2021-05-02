@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import "./App.css";
-//import { createApi } from "unsplash-js";
+import { createApi } from "unsplash-js";
 
 import Board from "./components/Board";
 import Select from "./components/Select";
@@ -10,7 +10,23 @@ import Select from "./components/Select";
 const App = () => {
   const [option, setOption] = useState(8);
   const [images, setImages] = useState([]);
-  // const [completedImg, setCompletedImg] = useState([]);
+
+  // -----------------------library usage start-----------------------
+  const unsplash = createApi({
+    accessKey: "ihnyzbSe2SNeccUWfV4tZWQFbMaapIvg7L-vuf5mUjs",
+  });
+  const getUnsplashPhotos = async () => {
+    const response = await unsplash.photos.get({
+      page: 1,
+      perPage: option,
+    });
+    // unsplash.photos
+    //   .getRandom({ page: 1, page: option })
+    //   .then((result) => (photo = result.response));
+    console.log(response);
+  };
+  console.log(getUnsplashPhotos());
+  // -----------------------library usage end-----------------------
 
   // ------------------------increment shuffle?------------------------
   const shuffle = (arr) => {
@@ -29,29 +45,20 @@ const App = () => {
     );
     let data = await Promise.all(response.map((item) => item.blob())); //axios юзнуть https://github.com/unsplash/unsplash-js#usage
     const urlCreator = window.URL || window.webkitURL;
-    //data = data.map((item) => urlCreator.createObjectURL(item));
-    // data = data.map((item) => {
-    //   return {
-    //     src: urlCreator.createObjectURL(item),
-    //     completed: false,
-    //     id: Math.floor(Math.random() * 1000),
-    //   };
-    // });
     data = data.map((item) => {
       return {
         src: urlCreator.createObjectURL(item),
         rotated: false,
         completed: false,
-        pairId: 'uuidv4()',
+        pairId: uuidv4(),
       };
     });
     data = shuffle(
       data.concat(data).map((item) => ({ ...item, id: uuidv4() }))
-    ); //.sort(() => Math.random() - 0.5);
+    );
     setImages(data);
   };
   console.log(images);
-  //TODO: implement shuffle function
 
   useEffect(() => {
     getImage();
@@ -59,10 +66,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Board
-        images={images}
-        setImages={setImages}
-      />
+      <Board images={images} setImages={setImages} />
       <Select option={option} setOption={setOption} />
     </div>
   );
