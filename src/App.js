@@ -7,10 +7,13 @@ import Board from "./components/Board";
 import Select from "./components/Select";
 
 import { getImages } from "./api";
+import Score from "./components/Score";
 
 const App = () => {
-  const [option, setOption] = useState(4);
+  const [option, setOption] = useState(8);
   const [images, setImages] = useState([]);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
   // ------------------------increment shuffle?------------------------
   const shuffle = (arr) => {
@@ -35,8 +38,6 @@ const App = () => {
     data = shuffle(
       data.concat(data).map((item) => ({ ...item, id: uuidv4() }))
     );
-
-    console.log(data)
     setImages(data);
   };
 
@@ -44,10 +45,35 @@ const App = () => {
     getImage();
   }, [option]);
 
+  useEffect(() => {
+    getLocalScore();
+  }, []);
+
+  // const saveLocalScore = () => {
+  //   localStorage.setItem("highScore", JSON.stringify(highScore));
+  // };
+
+  const getLocalScore = () => {
+    if (localStorage.getItem("highScore") === null) {
+      localStorage.setItem("highScore", JSON.stringify([]));
+    } else {
+      let localScore = JSON.parse(localStorage.getItem("highScore"));
+      setHighScore(localScore);
+    }
+  };
+
   return (
     <div className="app">
-      <Board images={images} setImages={setImages} />
+      <Board
+        images={images}
+        setImages={setImages}
+        score={score}
+        setScore={setScore}
+        highScore={highScore}
+        setHighScore={setHighScore}
+      />
       <Select option={option} setOption={setOption} />
+      <Score score={score} highScore={highScore} />
     </div>
   );
 };

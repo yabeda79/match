@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+// Card component
+
 export const StyledCard = styled.div`
   width: 150px;
   height: 150px;
@@ -41,10 +43,18 @@ export const StyledCardBg = styled.div`
   background-color: #bbb;
 `;
 
-// для дива
+// Score component
 
-// transform: rotateY(${({ rotated }) => rotated ? 180 : 0}deg);
-// transform: translate(-50%, -50%);
+export const StyledScore=styled.div`
+  display: flex;
+  justify-items: left;
+  margin: 10px;
+`
 
-// transition: transform 0.5s;
-//  transform: scaleX(${({ rotated }) => (rotated ? 0 : 1)});
+export const StyledScoreText=styled.p`
+  margin:10px;
+  display: block;
+  font-size: 24px;
+  color: white;
+`
+
