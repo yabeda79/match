@@ -13,7 +13,7 @@ const Card = ({ image, onClick }) => {
     <StyledCard onClick={() => onClick(image.id)}>
       <StyledCardInner rotated={image.rotated || image.completed}>
         <StyledCardBg />
-        <StyledCardImage rotated={image.rotated} src={image.src} alt="card" />
+        <StyledCardImage rotated={image.rotated} url={image.url} alt="card" />
       </StyledCardInner>
     </StyledCard>
   );

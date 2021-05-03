@@ -20,10 +20,13 @@ export const StyledCardInner = styled.div`
   transition: transform 0.5s;
 `;
 
-export const StyledCardImage = styled.img`
+export const StyledCardImage = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  background-image: url(${({ url }) => url});
+  background-position: center;
+  background-size: cover;
   overflow: hidden;
   backface-visibility: hidden;
   background-color: dodgerblue;
